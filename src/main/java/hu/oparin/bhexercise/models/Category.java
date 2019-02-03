@@ -1,5 +1,10 @@
 package hu.oparin.bhexercise.models;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateDeserializer;
+import org.hibernate.validator.constraints.Range;
+
 import javax.persistence.*;
 import javax.validation.constraints.Size;
 import java.time.LocalDate;
@@ -8,26 +13,33 @@ import java.time.LocalDate;
 @Table(name = "CATEGORY")
 public class Category {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "fare_id")
+    @JoinColumn(name = "FARE_id")
     private Fare fare;
 
-    @Size(min = 1, max = 33)
+    @Range(min = 1, max = 33)
     private int categoryNumber;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     private LocalDate validFrom;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     private LocalDate validTo;
 
     public Category() {
         this.categoryNumber = 3;
     }
 
-    public Category(Fare fare, @Size(min = 1, max = 33) int categoryNumber, LocalDate validFrom,
-                    LocalDate validTo) {
+    public Category(Fare fare, @Range(min = 1, max = 33) int categoryNumber, LocalDate validFrom, LocalDate validTo) {
         this.fare = fare;
         this.categoryNumber = categoryNumber;
+        this.validFrom = validFrom;
+        this.validTo = validTo;
+    }
+
+    public Category(Fare fare, LocalDate validFrom, LocalDate validTo) {
+        this.fare = fare;
         this.validFrom = validFrom;
         this.validTo = validTo;
     }

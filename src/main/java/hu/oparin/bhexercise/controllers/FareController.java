@@ -62,5 +62,5 @@ public class FareController extends ResponseEntityExceptionHandler {
         } else {
             return new ResponseEntity<>(fareService.create(fare.getCarrier(), fare.getOrigin(), fare.getDestination(), fare.getFareClassCode()), HttpStatus.CREATED);
         }
-    } 
+    }
 }
