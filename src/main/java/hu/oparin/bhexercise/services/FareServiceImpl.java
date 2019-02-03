@@ -21,9 +21,7 @@ public class FareServiceImpl implements FareService{
 
     @Override
     public List<Fare> filter(FareFilterRequest fareFilterRequest) {
-        List<Fare> travels = new ArrayList<>();
-        fareRepository.findAllByOriginAndDestination(fareFilterRequest.getOrigin(), fareFilterRequest.getDestination()).forEach(travels::add);
-        return travels;
+        return fareRepository.findAllByOriginAndDestination(fareFilterRequest.getOrigin(), fareFilterRequest.getDestination());
     }
 
     @Override
