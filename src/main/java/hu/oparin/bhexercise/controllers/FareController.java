@@ -2,6 +2,7 @@ package hu.oparin.bhexercise.controllers;
 
 import hu.oparin.bhexercise.factories.MessageFactory;
 import hu.oparin.bhexercise.models.ErrorMessage;
+import hu.oparin.bhexercise.models.Fare;
 import hu.oparin.bhexercise.models.FareFilterRequest;
 import hu.oparin.bhexercise.services.FareService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -51,4 +52,15 @@ public class FareController extends ResponseEntityExceptionHandler {
             return new ResponseEntity<>(fareService.filter(fareFilterRequest), HttpStatus.OK);
         }
     }
+
+    @PostMapping("/fare/create")
+    public ResponseEntity<Object> createFare(@Valid @RequestBody Fare fare) {
+        if (fare.getCarrier() == null || fare.getOrigin() == null || fare.getDestination() == null
+                || fare.getFareClassCode() == null) {
+            ErrorMessage missingField = MessageFactory.missingFields();
+            return new ResponseEntity<>(missingField, HttpStatus.BAD_REQUEST);
+        } else {
+            return new ResponseEntity<>(fareService.create(fare.getCarrier(), fare.getOrigin(), fare.getDestination(), fare.getFareClassCode()), HttpStatus.CREATED);
+        }
+    } 
 }

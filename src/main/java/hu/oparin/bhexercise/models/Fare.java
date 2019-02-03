@@ -1,9 +1,8 @@
 package hu.oparin.bhexercise.models;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import org.hibernate.validator.constraints.Range;
+
+import javax.persistence.*;
 import javax.validation.constraints.Size;
 import java.time.LocalDate;
 
@@ -11,7 +10,7 @@ import java.time.LocalDate;
 @Table(name = "FARE")
 public class Fare {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Size(max = 2)
     private String carrier;
@@ -23,7 +22,7 @@ public class Fare {
     private LocalDate validFrom;
     @Size(max = 8)
     private String fareClassCode;
-    @Size(max = 5)
+    @Range(min = 1, max = 5)
     private Integer bookingClass;
 
     public Fare() {
