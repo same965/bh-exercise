@@ -9,4 +9,5 @@ import java.util.List;
 public interface CategoryService {
     Category create(Fare fare, LocalDate validFrom, LocalDate validTo);
     List<Category> listCategories();
+    Category findCategory(Long id);
 }

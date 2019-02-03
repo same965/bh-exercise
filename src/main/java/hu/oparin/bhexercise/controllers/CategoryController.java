@@ -9,10 +9,7 @@ import hu.oparin.bhexercise.services.FareService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.time.LocalDate;
@@ -39,5 +36,14 @@ public class CategoryController {
         }
     }
 
+    @GetMapping("/category/list")
+    public List<Category> categories() {
+        return categoryService.listCategories();
+    }
+
+    @GetMapping("/category/{id}")
+    public Category findCategory(@PathVariable(value = "id") Long id) {
+        return categoryService.findCategory(id);
+    }
 
 }

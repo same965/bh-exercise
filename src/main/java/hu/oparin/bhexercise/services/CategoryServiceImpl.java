@@ -30,4 +30,9 @@ public class CategoryServiceImpl implements CategoryService{
     public List<Category> listCategories() {
         return categoryRepository.findAll();
     }
+
+    @Override
+    public Category findCategory(Long id) {
+        return categoryRepository.findById(id).get();
+    }
 }
