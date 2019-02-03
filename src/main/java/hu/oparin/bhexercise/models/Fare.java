@@ -1,5 +1,6 @@
 package hu.oparin.bhexercise.models;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import org.hibernate.validator.constraints.Range;
 
 import javax.persistence.*;
@@ -18,7 +19,9 @@ public class Fare {
     private String origin;
     @Size(max = 3)
     private String destination;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     private LocalDate validTo;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     private LocalDate validFrom;
     @Size(max = 8)
     private String fareClassCode;

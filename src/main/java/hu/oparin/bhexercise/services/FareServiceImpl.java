@@ -35,8 +35,8 @@ public class FareServiceImpl implements FareService{
     }
 
     @Override
-    public Fare create(String carrier, String origin, String destination, String fareClassCode) {
-        Fare newFare = new Fare(carrier, origin, destination, LocalDate.now(), LocalDate.now().plusDays(5), fareClassCode, 1);
+    public Fare create(String carrier, String origin, String destination, LocalDate validFrom, LocalDate validTo, String fareClassCode) {
+        Fare newFare = new Fare(carrier, origin, destination, validFrom, validTo, fareClassCode, 1);
         fareRepository.save(newFare);
         return newFare;
     }

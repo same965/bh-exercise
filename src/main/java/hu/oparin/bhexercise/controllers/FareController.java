@@ -60,7 +60,7 @@ public class FareController extends ResponseEntityExceptionHandler {
             ErrorMessage missingField = MessageFactory.missingFields();
             return new ResponseEntity<>(missingField, HttpStatus.BAD_REQUEST);
         } else {
-            return new ResponseEntity<>(fareService.create(fare.getCarrier(), fare.getOrigin(), fare.getDestination(), fare.getFareClassCode()), HttpStatus.CREATED);
+            return new ResponseEntity<>(fareService.create(fare.getCarrier(), fare.getOrigin(), fare.getDestination(), fare.getValidFrom(), fare.getValidTo(), fare.getFareClassCode()), HttpStatus.CREATED);
         }
     }
 }
