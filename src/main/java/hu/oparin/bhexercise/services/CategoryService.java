@@ -11,4 +11,5 @@ public interface CategoryService {
     List<Category> listCategories();
     Category findCategory(Long id);
     void delete(Long id);
+    void update(Long id, int categoryNumber, LocalDate validFrom, LocalDate validTo);
 }

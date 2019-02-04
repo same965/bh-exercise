@@ -42,4 +42,15 @@ public class CategoryServiceImpl implements CategoryService{
             categoryRepository.delete(findCategory(id));
         }
     }
+
+    @Override
+    public void update(Long id, int categoryNumber, LocalDate validFrom, LocalDate validTo) {
+        if(categoryRepository.findById(id).isPresent()) {
+            Category update = categoryRepository.findById(id).get();
+            update.setCategoryNumber(categoryNumber);
+            update.setValidFrom(validFrom);
+            update.setValidTo(validTo);
+            categoryRepository.save(update);
+        }
+    }
 }

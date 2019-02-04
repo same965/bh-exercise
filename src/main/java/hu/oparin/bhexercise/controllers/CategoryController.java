@@ -52,4 +52,10 @@ public class CategoryController {
         return categoryService.listCategories();
     }
 
+    @PutMapping("/category/{id}/update")
+    public Category updateCategory(@PathVariable(value = "id") Long id, @Valid @RequestBody Category category) {
+        categoryService.update(id, category.getCategoryNumber(), category.getValidFrom(), category.getValidTo());
+        return categoryService.findCategory(id);
+    }
+
 }
